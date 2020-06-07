@@ -1,18 +1,28 @@
 
-<table class="highlight">
+{{!-- create table line by line --}}
+<h3 align='center'>{{viewTitle}}</h3>
+
+<table class="table table-hover" style="margin-bottom: 15%;">
     <thead>
         <tr>
-            <th data-field="id">Name</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
+            <th>Fri</th>
+            <th>Sat</th> 
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th> 
         </tr>
     </thead>
-    
     <tbody>
-        <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>.87</td>
-        </tr>
+    {{!-- iterates over movie list --}}
+        {{#each list}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.year}}</td>
+                <td>{{this.genre}}</td>
+                <td>{{this.cast}}</td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>

@@ -4,7 +4,7 @@ const mongoose = require('mongoose'); // Erase if already required
 var rnSchema = new mongoose.Schema({
     morning :{
         friday:{
-            start: ,
+            start: String,
             finish: String,
             staff: String
         },

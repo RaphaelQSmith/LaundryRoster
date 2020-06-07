@@ -1,7 +1,22 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+const path = require('path');
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log(`Example app listening on port port!`))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.set('views', path.join(__dirname, '/views/'));
+app.set('view engine', 'hbs');
+app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
+
+app.get('/', (req, res) => {
+    res.render("rosterview/table", {
+        viewTitle: "Weekly Roster"
+    });
+});
+
+app.listen(port, () => console.log(`Example app listening on port port ` + port))
 
