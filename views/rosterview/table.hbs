@@ -2,9 +2,10 @@
 {{!-- create table line by line --}}
 <h3 align='center'>{{viewTitle}}</h3>
 
-<table class="table table-hover" style="margin-bottom: 15%;">
+<table class="highlight centered responsive-table" style="margin-bottom: 15%;">
     <thead>
         <tr>
+            <th></th>
             <th>Fri</th>
             <th>Sat</th> 
             <th>Sun</th>
@@ -18,10 +19,22 @@
     {{!-- iterates over movie list --}}
         {{#each list}}
             <tr>
-                <td>{{this.title}}</td>
-                <td>{{this.year}}</td>
-                <td>{{this.genre}}</td>
-                <td>{{this.cast}}</td>
+                <td>{{this.mor.fri}}</td>
+                <td>{{this.mor.sat}}</td>
+                <td>{{this.mor.sun}}</td>
+                <td>{{this.mor.mon}}</td>
+                <td>{{this.mor.tue}}</td>
+                <td>{{this.mor.wed}}</td>
+                <td>{{this.mor.thu}}</td>
+            </tr>
+            <tr>
+                <td>{{this.eve.fri}}</td>
+                <td>{{this.eve.sat}}</td>
+                <td>{{this.eve.sun}}</td>
+                <td>{{this.eve.mon}}</td>
+                <td>{{this.eve.tue}}</td>
+                <td>{{this.eve.wed}}</td>
+                <td>{{this.eve.thu}}</td>
             </tr>
         {{/each}}
     </tbody>

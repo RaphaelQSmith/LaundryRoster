@@ -12,11 +12,8 @@ app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
 app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
 
-app.get('/', (req, res) => {
-    res.render("rosterview/table", {
-        viewTitle: "Weekly Roster"
-    });
-});
+const rosterRoute = require('./routes/routes')
+app.use('/',rosterRoute)
 
 app.listen(port, () => console.log(`Example app listening on port port ` + port))
 

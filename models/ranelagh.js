@@ -3,50 +3,78 @@ const mongoose = require('mongoose'); // Erase if already required
 // Declare the Schema of the Mongo model
 var rnSchema = new mongoose.Schema({
     morning :{
-        friday:{
+        fri:{
             start: String,
             finish: String,
             staff: String
         },
-        saturday:{
+        sat:{
             start: String,
             finish: String,
             staff: String
         },
-        sunday:{
+        sun:{
             start: String,
             finish: String,
             staff: String
         },
-        monday:{
+        mon:{
             start: String,
             finish: String,
             staff: String
         },
-        tuesday:{
+        tue:{
             start: String,
             finish: String,
             staff: String
         },
-        wednesday:{
+        wed:{
             start: String,
             finish: String,
             staff: String
         },
-        thursday:{
+        thu:{
             start: String,
             finish: String,
             staff: String
         }        
     },
     evening :{
-        friday:{},
-        saturday:{},
-        sunday:{},
-        monday:{},
-        tuesday:{},
-        wednesday:{},
-        thursday:{}        
+        fri:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        sat:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        sun:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        mon:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        tue:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        wed:{
+            start: String,
+            finish: String,
+            staff: String
+        },
+        thu:{
+            start: String,
+            finish: String,
+            staff: String
+        }                
     }
 });
 
