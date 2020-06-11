@@ -24,6 +24,8 @@
     "express-handlebars": "^4.0.4",
     "handlebars": "^4.7.6",
     "logger": "0.0.1",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "path": "^0.12.7"
   }

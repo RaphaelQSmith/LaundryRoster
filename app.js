@@ -1,10 +1,12 @@
 const express = require('express')
+logger = require("morgan")
 const app = express()
+const path = require('path');
 const port = 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const path = require('path');
 
+app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 

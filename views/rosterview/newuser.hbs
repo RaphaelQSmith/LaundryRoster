@@ -1,33 +1,42 @@
-<h3 align='center'>{{viewTitle}}</h3>
-
+<h5 align='center'>{{viewTitle}}</h5>
 <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+    <form class="col s8" enctype="application/json" action="/register/user" method="POST" autocomplete="off">
+        <div class="row">
+            <div class="input-field col s12 offset-m3">
+                <div class="col s6">
+                    <input id="fname" name="fname" type="text">
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="col s6">
+                    <input id="lname" name="lname" type="text">
+                    <label for="lname">Last Name</label>
+                </div>
+            </div>
         </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+        <div class="row">
+            <div class="input-field col s12 offset-m3">
+                <div class="col s6">
+                    <input id="email" type="email" name="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col s6">
+                    <input id="mobile" type="tel" name="mobile" class="validate">
+                    <label for="mobile">Mobile</label>
+                </div>
+            </div>
+        </div>    
+        <div class="row">    
+            <div class="input-field col s12 offset-m3">
+                <div class="col s6">
+                    <input id="password" type="password" name="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+                <div>
+                    <button class="btn waves-effect waves-light col s3 offset-m8" type="submit">Register
+                        <i class="material-icons right">group_add</i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-          <div class="input-field center col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Register
-                <i class="material-icons right">group_add</i>
-            </button>
-          </div>
-      </div>
-  </form>
+    </form>
 </div>
