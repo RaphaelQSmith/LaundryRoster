@@ -1,8 +1,5 @@
 const mongoose = require('../db/db');
 
-// Erase if already required
-
-// Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
     fname:{
         type:String,
