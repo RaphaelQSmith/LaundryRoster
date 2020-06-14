@@ -1,13 +1,36 @@
 var express = require('express')
 router = express.Router()
 User = require('../models/user')
+newRoster = require('../models/roster')
 
 
 router.get('/', (req, res) => {
+    res.render("rosterview/selectRoster", {
+        viewTitle: "Weekly Roster"
+    });
+});
+router.get('/roster', (req, res) => {
     res.render("rosterview/table", {
         viewTitle: "Weekly Roster"
     });
 });
+router.post('/roster',(req,res)=> {
+    let addRoster = new newRoster({
+
+    })
+
+    addRoster.save(function(err, users){
+        if(err){
+            res.status(400).json(err)
+        }else{
+            res.render("rosterview/table", {
+                viewTitle: "Weekly Roster"
+            });
+        }
+    })
+
+    
+})
 
 router.get('/register',(req,res)=> {
     res.render("rosterview/newuser", {
