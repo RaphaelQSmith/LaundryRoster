@@ -18,6 +18,5 @@ app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDi
 const rosterRoute = require('./routes/routes')
 app.use('/', rosterRoute)
 
-
 app.listen(port, () => console.log(`Example app listening on port port ` + port))
 

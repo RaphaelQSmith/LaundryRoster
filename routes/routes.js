@@ -6,9 +6,10 @@ const { check, validationResult} = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require('../middleware/auth')
+const config = require('../config')
 
 
-router.get('/home', (req, res) => {
+router.get('/home', auth, (req, res) => {
     res.render("rosterview/selectRoster", {
         viewTitle: "Weekly Roster"
     });
@@ -20,14 +21,14 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/roster', (req, res) => {
+router.get('/roster', auth, (req, res) => {
     res.render("rosterview/table", {
         viewTitle: "Weekly Roster"
     });
 });
+
 router.post('/roster',(req,res)=> {
     let addRoster = new newRoster({
-
     })
 
     addRoster.save(function(err, users){
@@ -39,36 +40,15 @@ router.post('/roster',(req,res)=> {
             });
         }
     })
-
-    
 })
 
-router.get('/register',(req,res)=> {
+router.get('/register', auth, (req,res)=> {
     res.render("rosterview/newuser", {
         viewTitle: "Register a new User"
     });
 });
 
-// router.post('/register/user', (req, res) =>{
-//     console.log(req.body);
-//     let newUser = new User({
-//         fname: req.body.fname,
-//         lname: req.body.lname,
-//         email: req.body.email,
-//         mobile: req.body.mobile,
-//         password: req.body.password
-//     });
-
-//     newUser.save(function(err, users){
-//         if(err){
-//             res.status(400).json(err)
-//         }else{
-//         res.redirect("/");
-//         }
-//     })
-// });
-
-router.get('/newroster', (req, res) => {
+router.get('/newroster', auth, (req, res) => {
   res.render('rosterview/newRoster', {
     viewTitle: "Create a new Roster"
   })
@@ -77,8 +57,6 @@ router.get('/newroster', (req, res) => {
 router.post('/newroster', (req, res) =>{
     console.log(req.body)
 })
-
-
 
 router.post(
     "/user/signup",
@@ -137,7 +115,7 @@ router.post(
 
             jwt.sign(
                 payload,
-                "randomString", {
+                config.secret, {
                     expiresIn: 10000
                 },
                 (err, token) => {
@@ -171,7 +149,8 @@ router.post(
       });
     }
 
-    const { email, password } = req.body;
+    const email = req.body.email,
+          password= req.body.password
     try {
       let user = await User.findOne({
         email
@@ -195,7 +174,7 @@ router.post(
 
       jwt.sign(
         payload,
-        "randomString",
+        config.secret,
         {
           expiresIn: 3600
         },
@@ -221,7 +200,7 @@ router.get("/user/me", auth, async (req, res) => {
       const user = await User.findById(req.user.id);
       res.json(user);
     } catch (e) {
-      res.send({ message: "Error in Fetching user" });
+      res.send({ message: "Error in Fetching user" }); 
     }
   });
 
