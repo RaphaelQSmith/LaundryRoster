@@ -5,6 +5,9 @@ const path = require('path');
 const port = 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const passport = require('passport-http-bearer')
+const session = require(express-session)
+
 
 
 app.use(logger('dev'))
@@ -15,8 +18,9 @@ app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
 app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
 
+app.User()
 const rosterRoute = require('./routes/routes')
 app.use('/', rosterRoute)
 
-app.listen(port, () => console.log(`Example app listening on port port ` + port))
+app.listen(port, () => console.log(`Roster App listening on port ` + port))
 

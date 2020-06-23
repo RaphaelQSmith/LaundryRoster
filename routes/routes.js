@@ -10,9 +10,23 @@ const config = require('../config')
 
 
 router.get('/home', auth, (req, res) => {
-    res.render("rosterview/selectRoster", {
-        viewTitle: "Weekly Roster"
-    });
+
+  jwt.verify(req.token, config.secret, (err, authorizedData) => {
+    if(err){
+        //If error send Forbidden (403)
+        console.log('ERROR: Could not connect to the protected route');
+        res.sendStatus(403);
+    } else {
+        //If token is successfully verified, we can send the autorized data 
+        
+            res.render("rosterview/selectRoster", {
+              viewTitle: "Weekly Roster"
+          });
+
+
+        console.log('SUCCESS: Connected to protected route');
+    }    
+})
 });
 
 router.get('/', (req, res) => {
@@ -180,7 +194,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({
+          res.send({
             token
           });
         }
