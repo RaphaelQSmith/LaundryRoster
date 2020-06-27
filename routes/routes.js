@@ -2,32 +2,18 @@ var express = require('express');
 var router = express.Router()
 User = require('../models/user')
 newRoster = require('../models/roster')
-const { check, validationResult} = require("express-validator/check");
+const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const auth = require('../middleware/auth')
 const config = require('../config')
 
+let inMemoryToken;
 
-router.get('/home', auth, (req, res) => {
+router.get('/home', (req, res) => {
 
-  jwt.verify(req.token, config.secret, (err, authorizedData) => {
-    if(err){
-        //If error send Forbidden (403)
-        console.log('ERROR: Could not connect to the protected route');
-        res.sendStatus(403);
-    } else {
-        //If token is successfully verified, we can send the autorized data 
-        
-            res.render("rosterview/selectRoster", {
+          res.render("rosterview/selectRoster", {
               viewTitle: "Weekly Roster"
           });
-
-
-        console.log('SUCCESS: Connected to protected route');
-    }    
-})
-});
+  });
 
 router.get('/', (req, res) => {
     res.render("rosterview/login", {
@@ -35,7 +21,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/roster', auth, (req, res) => {
+router.get('/roster', (req, res) => {
     res.render("rosterview/table", {
         viewTitle: "Weekly Roster"
     });
@@ -56,13 +42,13 @@ router.post('/roster',(req,res)=> {
     })
 })
 
-router.get('/register', auth, (req,res)=> {
+router.get('/register', (req,res)=> {
     res.render("rosterview/newuser", {
         viewTitle: "Register a new User"
     });
 });
 
-router.get('/newroster', auth, (req, res) => {
+router.get('/newroster', (req, res) => {
   res.render('rosterview/newRoster', {
     viewTitle: "Create a new Roster"
   })
@@ -126,19 +112,6 @@ router.post(
                     id: user.id
                 }
             };
-
-            jwt.sign(
-                payload,
-                config.secret, {
-                    expiresIn: 10000
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(200).json({
-                        token
-                    });
-                }
-                );
         } catch (err) {
             console.log(err.message);
             res.status(500).send("Error in Saving");
@@ -185,20 +158,6 @@ router.post(
           id: user.id
         }
       };
-
-      jwt.sign(
-        payload,
-        config.secret,
-        {
-          expiresIn: 3600
-        },
-        (err, token) => {
-          if (err) throw err;
-          res.send({
-            token
-          });
-        }
-      );
     } catch (e) {
       console.error(e);
       res.status(500).json({
@@ -207,15 +166,5 @@ router.post(
     }
   }
 );
-
-router.get("/user/me", auth, async (req, res) => {
-    try {
-      // request.user is getting fetched from Middleware after token authentication
-      const user = await User.findById(req.user.id);
-      res.json(user);
-    } catch (e) {
-      res.send({ message: "Error in Fetching user" }); 
-    }
-  });
 
 module.exports = router;
