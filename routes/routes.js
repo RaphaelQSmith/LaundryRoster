@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router()
 User = require('../models/user')
-newRoster = require('../models/roster')
+Roster = require('../models/roster')
 const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const config = require('../config')
@@ -9,7 +9,6 @@ const config = require('../config')
 let inMemoryToken;
 
 router.get('/home', (req, res) => {
-
           res.render("rosterview/selectRoster", {
               viewTitle: "Weekly Roster"
           });
@@ -22,13 +21,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/roster', (req, res) => {
+  Roster.find({ date: req.date}, (err, rosterlist) => {
+    if (err) {
+      res.status(400).json(err);
+    } 
     res.render("rosterview/table", {
-        viewTitle: "Weekly Roster"
-    });
+      viewTitle: "Weekly Roster",
+      list: rosterlist
+    })
+  })
 });
 
 router.post('/roster',(req,res)=> {
-    let addRoster = new newRoster({
+    let addRoster = new Roster({
     })
 
     addRoster.save(function(err, users){
@@ -106,7 +111,6 @@ router.post(
             user.password = await bcrypt.hash(password, salt);
 
             await user.save();
-
             const payload = {
                 user: {
                     id: user.id
@@ -148,16 +152,17 @@ router.post(
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch)
+      if (!isMatch){
         return res.status(400).json({
           message: "Incorrect Password !"
         });
-
-      const payload = {
-        user: {
-          id: user.id
-        }
-      };
+      }
+      res.render('rosterview/selectRoster',{
+        viewTitle: 'Select a date',
+        item: user.fname,
+        user_id: user.id
+      })
+      
     } catch (e) {
       console.error(e);
       res.status(500).json({

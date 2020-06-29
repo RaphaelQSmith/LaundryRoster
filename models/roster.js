@@ -2,7 +2,8 @@ const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var rosterSchema = new mongoose.Schema({
-    morning :{
+    Store: String,
+     morning :{
         fri: String,
         sat: String,
         sun: String,
