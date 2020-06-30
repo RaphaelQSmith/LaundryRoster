@@ -2,7 +2,7 @@
 <h5 align='center'>{{viewTitle}}</h5>
 
 <table class="highlight centered responsive-table" style="margin-bottom: 15%;">
-
+    <h5 align='center'>{{this.date}}</h5>
     <thead>
         <tr>
             <th></th>
@@ -19,6 +19,7 @@
         {{!-- iterates over movie list --}}
         {{#each list}}
         <tr>
+            <td>{{this.Store}}</td>
             <td>{{this.mor.fri}}</td>
             <td>{{this.mor.sat}}</td>
             <td>{{this.mor.sun}}</td>

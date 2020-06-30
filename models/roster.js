@@ -2,8 +2,10 @@ const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var rosterSchema = new mongoose.Schema({
-    Store: String,
-     morning :{
+    date: String,
+    store: String,
+     mor :{
+        shift: String, 
         fri: String,
         sat: String,
         sun: String,
@@ -12,7 +14,8 @@ var rosterSchema = new mongoose.Schema({
         wed:String,
         thu:String    
     },
-    evening :{
+    eve :{
+        shift: String,
         fri: String,
         sat: String,
         sun: String,
@@ -20,7 +23,7 @@ var rosterSchema = new mongoose.Schema({
         tue:String,
         wed:String,
         thu:String                
-    }
+    },
 });
 
 //Export the model
