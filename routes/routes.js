@@ -4,14 +4,15 @@ User = require('../models/user')
 Roster = require('../models/roster')
 const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
-const config = require('../config')
+const config = require('../config');
+const { weekdaysMin } = require('moment');
 
 let inMemoryToken;
 
 router.get('/home', (req, res) => {
-          res.render("rosterview/selectRoster", {
-              viewTitle: "Weekly Roster"
-          });
+      res.render("rosterview/selectRoster", {
+        viewTitle: "Weekly Roster"
+      });
   });
 
 router.get('/', (req, res) => {
@@ -61,6 +62,34 @@ router.get('/newroster', (req, res) => {
 
 router.post('/newroster', (req, res) =>{
     console.log(req.body)
+    let newRoster = new Roster({
+      date: req.body.date,
+      store: req.body.store,
+      friM: req.body.friM,
+      satM: req.body.satM,
+      sunM: req.body.sunM,
+      monM: req.body.monM,
+      tueM: req.body.tueM,
+      wedM: req.body.wedM,
+      thuM: req.body.thuM,
+      friE: req.body.friE,
+      satE: req.body.satE,
+      sunE: req.body.sunE,
+      monE: req.body.monE,
+      tueE: req.body.tueE,
+      wedE: req.body.wedE,
+      thuE: req.body.thuE
+    })
+  
+
+  newRoster.save(function(err, roster){
+      if(err){
+          res.status(400).json(err)
+      }
+      res.render("rosterview/newRoster", {
+        viewTitle: "Create a new Roster"
+    });
+  })
 })
 
 router.post(

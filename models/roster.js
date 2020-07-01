@@ -5,24 +5,24 @@ var rosterSchema = new mongoose.Schema({
     date: String,
     store: String,
      mor :{
-        shift: String, 
-        fri: String,
-        sat: String,
-        sun: String,
-        mon:String,
-        tue:String,
-        wed:String,
-        thu:String    
+        shiftM: String, 
+        friM: String,
+        satM: String,
+        sunM: String,
+        monM:String,
+        tueM:String,
+        wedM:String,
+        thuM:String    
     },
     eve :{
-        shift: String,
-        fri: String,
-        sat: String,
-        sun: String,
-        mon:String,
-        tue:String,
-        wed:String,
-        thu:String                
+        shiftE: String,
+        friE: String,
+        satE: String,
+        sunE: String,
+        monE:String,
+        tueE:String,
+        wedE:String,
+        thuE:String                
     },
 });
 
