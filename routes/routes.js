@@ -21,8 +21,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/roster', (req, res) => {
-  Roster.find({ date: req.date}, (err, rosterlist) => {
+router.get('/roster/:date', (req, res) => {
+  Roster.find({ date: req.params.date}, (err, rosterlist) => {
+    console.log(rosterlist)
+    console.log(req.date)
     if (err) {
       res.status(400).json(err);
     } 
@@ -34,18 +36,16 @@ router.get('/roster', (req, res) => {
 });
 
 router.post('/roster',(req,res)=> {
-    let addRoster = new Roster({
+  Roster.find({ date: req.params.date}, (err, rosterlist) => {
+    console.log(rosterlist)
+    if (err) {
+      res.status(400).json(err);
+    } 
+    res.render("rosterview/table", {
+      viewTitle: "Weekly Roster",
+      list: rosterlist
     })
-
-    addRoster.save(function(err, users){
-        if(err){
-            res.status(400).json(err)
-        }else{
-            res.render("rosterview/table", {
-                viewTitle: "Weekly Roster"
-            });
-        }
-    })
+  })
 })
 
 router.get('/register', (req,res)=> {
@@ -65,21 +65,25 @@ router.post('/newroster', (req, res) =>{
     let newRoster = new Roster({
       date: req.body.date,
       store: req.body.store,
-      friM: req.body.friM,
-      satM: req.body.satM,
-      sunM: req.body.sunM,
-      monM: req.body.monM,
-      tueM: req.body.tueM,
-      wedM: req.body.wedM,
-      thuM: req.body.thuM,
-      friE: req.body.friE,
-      satE: req.body.satE,
-      sunE: req.body.sunE,
-      monE: req.body.monE,
-      tueE: req.body.tueE,
-      wedE: req.body.wedE,
-      thuE: req.body.thuE
-    })
+      mor: {
+        friM: req.body.friM,
+        satM: req.body.satM,
+        sunM: req.body.sunM,
+        monM: req.body.monM,
+        tueM: req.body.tueM,
+        wedM: req.body.wedM,
+        thuM: req.body.thuM
+      },
+      eve : {
+        friE: req.body.friE,
+        satE: req.body.satE,
+        sunE: req.body.sunE,
+        monE: req.body.monE,
+        tueE: req.body.tueE,
+        wedE: req.body.wedE,
+        thuE: req.body.thuE
+      }
+  })
   
 
   newRoster.save(function(err, roster){

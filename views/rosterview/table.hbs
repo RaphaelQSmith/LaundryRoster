@@ -2,7 +2,7 @@
 <h5 align='center'>{{viewTitle}}</h5>
 
 <table class="highlight centered responsive-table" style="margin-bottom: 15%;">
-    <h5 align='center'>{{this.date}}</h5>
+    <h5 align='center'>{{list.date}}</h5>
     <thead>
         <tr>
             <th></th>
@@ -20,22 +20,22 @@
         {{#each list}}
         <tr>
             <td>{{this.Store}}</td>
-            <td>{{this.mor.fri}}</td>
-            <td>{{this.mor.sat}}</td>
-            <td>{{this.mor.sun}}</td>
-            <td>{{this.mor.mon}}</td>
-            <td>{{this.mor.tue}}</td>
-            <td>{{this.mor.wed}}</td>
-            <td>{{this.mor.thu}}</td>
+            <td>{{this.mor.friM}}</td>
+            <td>{{this.mor.satM}}</td>
+            <td>{{this.mor.sunM}}</td>
+            <td>{{this.mor.monM}}</td>
+            <td>{{this.mor.tueM}}</td>
+            <td>{{this.mor.wedM}}</td>
+            <td>{{this.mor.thuM}}</td>
         </tr>
         <tr>
-            <td>{{this.eve.fri}}</td>
-            <td>{{this.eve.sat}}</td>
-            <td>{{this.eve.sun}}</td>
-            <td>{{this.eve.mon}}</td>
-            <td>{{this.eve.tue}}</td>
-            <td>{{this.eve.wed}}</td>
-            <td>{{this.eve.thu}}</td>
+            <td>{{this.eve.friE}}</td>
+            <td>{{this.eve.satE}}</td>
+            <td>{{this.eve.sunE}}</td>
+            <td>{{this.eve.monE}}</td>
+            <td>{{this.eve.tueE}}</td>
+            <td>{{this.eve.wedE}}</td>
+            <td>{{this.eve.thuE}}</td>
         </tr>
         {{/each}}
     </tbody>
