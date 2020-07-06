@@ -21,22 +21,22 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/roster/:date', (req, res) => {
-  Roster.find({ date: req.params.date}, (err, rosterlist) => {
-    console.log(rosterlist)
-    console.log(req.date)
-    if (err) {
-      res.status(400).json(err);
-    } 
-    res.render("rosterview/table", {
-      viewTitle: "Weekly Roster",
-      list: rosterlist
-    })
-  })
-});
+// router.get('/roster', (req, res) => {
+//   Roster.find({ date: req.body.date}, (err, rosterlist) => {
+//     console.log(rosterlist)
+//     console.log(req.date)
+//     if (err) {
+//       res.status(400).json(err);
+//     } 
+//     res.render("rosterview/table", {
+//       viewTitle: "Weekly Roster",
+//       list: rosterlist
+//     })
+//   })
+// });
 
 router.post('/roster',(req,res)=> {
-  Roster.find({ date: req.params.date}, (err, rosterlist) => {
+  Roster.find({ date: req.body.date}, (err, rosterlist) => {
     console.log(rosterlist)
     if (err) {
       res.status(400).json(err);
@@ -45,8 +45,8 @@ router.post('/roster',(req,res)=> {
       viewTitle: "Weekly Roster",
       list: rosterlist
     })
-  })
-})
+  }).lean()
+});
 
 router.get('/register', (req,res)=> {
     res.render("rosterview/newuser", {
@@ -66,6 +66,7 @@ router.post('/newroster', (req, res) =>{
       date: req.body.date,
       store: req.body.store,
       mor: {
+        shiftM: "Morning",
         friM: req.body.friM,
         satM: req.body.satM,
         sunM: req.body.sunM,
@@ -75,6 +76,7 @@ router.post('/newroster', (req, res) =>{
         thuM: req.body.thuM
       },
       eve : {
+        shiftE: "Evening",
         friE: req.body.friE,
         satE: req.body.satE,
         sunE: req.body.sunE,

@@ -1,7 +1,7 @@
 <h5 style="margin-top: 3%;" align='center'>Welcome, {{item}}</h5>
 <h5 style="margin-top: 4%;" align='center'>{{viewTitle}}</h5>
 
-<form enctype="application/json" action="/roster/" method="GET">
+<form enctype="application/json" action="/roster/" method="POST">
     <div class="col s10">
         {{!-- <input type="hidden" name="_id" value="{{user_id}}"> --}}
         <input type="text" name="date" class="datepicker col s3 offset-m6" placeholder="Select a date">

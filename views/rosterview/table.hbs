@@ -1,42 +1,48 @@
 {{!-- create table line by line --}}
 <h5 align='center'>{{viewTitle}}</h5>
-
-<table class="highlight centered responsive-table" style="margin-bottom: 15%;">
-    <h5 align='center'>{{list.date}}</h5>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{!-- iterates over movie list --}}
-        {{#each list}}
-        <tr>
-            <td>{{this.Store}}</td>
-            <td>{{this.mor.friM}}</td>
-            <td>{{this.mor.satM}}</td>
-            <td>{{this.mor.sunM}}</td>
-            <td>{{this.mor.monM}}</td>
-            <td>{{this.mor.tueM}}</td>
-            <td>{{this.mor.wedM}}</td>
-            <td>{{this.mor.thuM}}</td>
-        </tr>
-        <tr>
-            <td>{{this.eve.friE}}</td>
-            <td>{{this.eve.satE}}</td>
-            <td>{{this.eve.sunE}}</td>
-            <td>{{this.eve.monE}}</td>
-            <td>{{this.eve.tueE}}</td>
-            <td>{{this.eve.wedE}}</td>
-            <td>{{this.eve.thuE}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+  <h5 align='center'>{{this.date}}</h5>
+<div class="container" style="margin-top: 5%;">    
+    {{#each list}}
+    <table class="highlight centered responsive-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+            </tr>
+        </thead>
+      
+           
+        <tbody>
+            {{!-- iterates over movie list --}}
+         
+            <h5 align='left'>{{this.store}}</h5>
+            <tr>
+                <td>{{this.mor.shiftM}}</td>
+                <td>{{this.mor.friM}}</td>
+                <td>{{this.mor.satM}}</td>
+                <td>{{this.mor.sunM}}</td>
+                <td>{{this.mor.monM}}</td>
+                <td>{{this.mor.tueM}}</td>
+                <td>{{this.mor.wedM}}</td>
+                <td>{{this.mor.thuM}}</td>
+            </tr>
+            <tr>
+                <td>{{this.eve.shiftE}}</td>
+                <td>{{this.eve.friE}}</td>
+                <td>{{this.eve.satE}}</td>
+                <td>{{this.eve.sunE}}</td>
+                <td>{{this.eve.monE}}</td>
+                <td>{{this.eve.tueE}}</td>
+                <td>{{this.eve.wedE}}</td>
+                <td>{{this.eve.thuE}}</td>
+            </tr>
+        </tbody>
+    </table>
+     {{/each}}
+</div>>    
