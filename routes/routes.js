@@ -21,20 +21,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// router.get('/roster', (req, res) => {
-//   Roster.find({ date: req.body.date}, (err, rosterlist) => {
-//     console.log(rosterlist)
-//     console.log(req.date)
-//     if (err) {
-//       res.status(400).json(err);
-//     } 
-//     res.render("rosterview/table", {
-//       viewTitle: "Weekly Roster",
-//       list: rosterlist
-//     })
-//   })
-// });
-
 router.post('/roster',(req,res)=> {
   Roster.find({ date: req.body.date}, (err, rosterlist) => {
     console.log(rosterlist)
@@ -57,6 +43,16 @@ router.get('/register', (req,res)=> {
 router.get('/newroster', (req, res) => {
   res.render('rosterview/newRoster', {
     viewTitle: "Create a new Roster"
+  })
+})
+
+router.get('/delete/:id', (req, res) =>{
+  Roster.findByIdAndRemove(req.params.id, (err, rst) => {
+    if(!err){
+      res.render("rosterview/table", {
+        viewTitle: "Weekly Roster",
+      })
+    }
   })
 })
 
@@ -87,7 +83,6 @@ router.post('/newroster', (req, res) =>{
       }
   })
   
-
   newRoster.save(function(err, roster){
       if(err){
           res.status(400).json(err)
