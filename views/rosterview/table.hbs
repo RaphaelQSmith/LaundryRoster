@@ -1,6 +1,5 @@
 {{!-- create table line by line --}}
-<h5 align='center'>{{viewTitle}}</h5>
-  <h5 align='center'>{{this.date}}</h5>
+ <h5 align='center'>{{date}}</h5>  
 <div class="container" style="margin-top: 5%;">    
     {{#each list}}
     <table class="highlight centered responsive-table">
@@ -15,12 +14,9 @@
                 <th>Wed</th>
                 <th>Thu</th>
             </tr>
-        </thead>
-      
-           
+        </thead>           
         <tbody>
             {{!-- iterates over movie list --}}
-         
             <h5 align='left'>{{this.store}}</h5>
             <tr>
                 <td>{{this.mor.shiftM}}</td>

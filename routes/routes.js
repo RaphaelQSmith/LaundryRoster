@@ -5,9 +5,6 @@ Roster = require('../models/roster')
 const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const config = require('../config');
-const { weekdaysMin } = require('moment');
-
-let inMemoryToken;
 
 router.get('/home', (req, res) => {
       res.render("rosterview/selectRoster", {
@@ -22,16 +19,26 @@ router.get('/', (req, res) => {
 });
 
 router.post('/roster',(req,res)=> {
-  Roster.find({ date: req.body.date}, (err, rosterlist) => {
-    console.log(rosterlist)
-    if (err) {
-      res.status(400).json(err);
-    } 
-    res.render("rosterview/table", {
-      viewTitle: "Weekly Roster",
-      list: rosterlist
-    })
+  //  check user id
+  User.findById({ _id: req.body.user_id}, (err, user) => {
+    if(err){
+      res.redirect('/')
+    }else{
+      Roster.find({ date: req.body.date}, (err, rosterlist) => {
+        console.log(rosterlist)
+        if (err) {
+          res.status(400).json(err);
+        } 
+        res.render("rosterview/table", {
+          viewTitle: "Weekly Roster",
+          list: rosterlist,
+          date: req.body.date
+        })
+      }).lean()
+    }
   }).lean()
+
+ 
 });
 
 router.get('/register', (req,res)=> {
