@@ -11,15 +11,15 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.set('views', path.join(__dirname, '/views/'));
+app.set('view engine', 'hbs');
+app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
 app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true }
 }))
-app.set('views', path.join(__dirname, '/views/'));
-app.set('view engine', 'hbs');
-app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
 
 const rosterRoute = require('./routes/routes')
 app.use('/', rosterRoute)

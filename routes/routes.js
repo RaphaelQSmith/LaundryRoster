@@ -7,10 +7,14 @@ const bcrypt = require("bcryptjs");
 const config = require('../config');
 
 router.get('/home', (req, res) => {
-      res.render("rosterview/selectRoster", {
+  if(!req.session.logged){
+    // console.log("Please log in first")
+    res.redirect('/')
+  }
+  res.render("rosterview/selectRoster", {
         viewTitle: "Weekly Roster"
       });
-  });
+});
 
 router.get('/', (req, res) => {
     res.render("rosterview/login", {
@@ -18,7 +22,11 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/roster',(req,res)=> {
+router.post('/roster',(req, res)=> {
+  if(!req.sessionID){
+    alert('Please log in first!')
+    res.redirect('/')
+  }
   //  check user id
   User.findById({ _id: req.body.user_id}, (err, user) => {
     if(err){
@@ -194,10 +202,12 @@ router.post(
           message: "Incorrect Password !"
         });
       }
+      req.session.logged = true
       res.render('rosterview/selectRoster',{
         viewTitle: 'Select a date',
         item: user.fname,
-        user_id: user.id
+        user_id: user.id,
+        logged: req.session.logged
       })
       
     } catch (e) {
