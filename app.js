@@ -2,7 +2,6 @@ const express = require('express')
 logger = require("morgan")
 const app = express()
 const path = require('path');
-const port = 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
@@ -24,5 +23,6 @@ app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDi
 const rosterRoute = require('./routes/routes')
 app.use('/', rosterRoute)
 
-app.listen(port, () => console.log(`Roster App listening on port ` + port))
-
+http.listen((process.env.PORT || 5000), function(){
+    console.log('listening on *:5000');
+  });
