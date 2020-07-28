@@ -8,12 +8,17 @@ const config = require('../config');
 
 router.get('/home', (req, res) => {
   if(!req.session.logged){
-    // console.log("Please log in first")
-    res.redirect('/')
+    req.session.logged = false;
   }
+  if(req.session.logged == false){
+    res.render("rosterview/login", {
+      viewTitle: "Please login first!"
+    })
+  }else{
   res.render("rosterview/selectRoster", {
         viewTitle: "Weekly Roster"
       });
+  }
 });
 
 router.get('/', (req, res) => {
@@ -22,9 +27,20 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/logout', (req, res) =>{
+  if(!req.session.logged){
+    req.session.logged = false;
+  }else if(req.session.logged == true){
+    req.session.logged = false
+  }
+  res.redirect('/')
+})
+
 router.post('/roster',(req, res)=> {
-  if(!req.sessionID){
-    alert('Please log in first!')
+  if(!req.session.logged){
+    req.session.logged = false;
+  }
+  if(req.session.logged == false){
     res.redirect('/')
   }
   //  check user id
@@ -45,20 +61,31 @@ router.post('/roster',(req, res)=> {
       }).lean()
     }
   }).lean()
-
- 
 });
 
 router.get('/register', (req,res)=> {
+  if(!req.session.logged){
+    req.session.logged = false;
+  }
+  if(req.session.logged == false){
+    res.redirect('/')
+  }else{
     res.render("rosterview/newuser", {
         viewTitle: "Register a new User"
-    });
+    })
+  }
 });
 
 router.get('/newroster', (req, res) => {
-  res.render('rosterview/newRoster', {
+  if(!req.session.logged){
+    req.session.logged = false;
+  }
+  if(req.session.logged == false){
+    res.redirect("/")
+  }else{
+    res.render('rosterview/newRoster', {
     viewTitle: "Create a new Roster"
-  })
+  })}  
 })
 
 router.get('/delete/:id', (req, res) =>{
@@ -114,14 +141,14 @@ router.post(
         check("fname", "Please Enter a Valid Username")
         .not()
         .isEmpty(),
-        check("email", "Please enter a valid email").isEmail(),
+        check("email", "Please enter a valid emai l").isEmail(),
         check("password", "Please enter a valid password").isLength({
             min: 6
         })
     ],
 
     async (req, res) => {
-        const errors = validationResult(req);
+      const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -202,12 +229,11 @@ router.post(
           message: "Incorrect Password !"
         });
       }
-      req.session.logged = true
+      req.session.logged = true;
       res.render('rosterview/selectRoster',{
         viewTitle: 'Select a date',
         item: user.fname,
-        user_id: user.id,
-        logged: req.session.logged
+        user_id: user.id
       })
       
     } catch (e) {
