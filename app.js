@@ -23,6 +23,6 @@ app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDi
 const rosterRoute = require('./routes/routes')
 app.use('/', rosterRoute)
 
-http.listen((process.env.PORT || 3000), function(){
+app.listen((process.env.PORT || 3000), function(){
     console.log('listening on *:3000');
   });
