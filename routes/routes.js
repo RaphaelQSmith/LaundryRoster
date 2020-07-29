@@ -43,24 +43,17 @@ router.post('/roster',(req, res)=> {
   if(req.session.logged == false){
     res.redirect('/')
   }
-  //  check user id
-  User.findById({ _id: req.body.user_id}, (err, user) => {
-    if(err){
-      res.redirect('/')
-    }else{
-      Roster.find({ date: req.body.date}, (err, rosterlist) => {
+  Roster.find({ date: req.body.date}, (err, rosterlist) => {
         console.log(rosterlist)
         if (err) {
           res.status(400).json(err);
         } 
         res.render("rosterview/table", {
-          viewTitle: "Weekly Roster",
+          viewTitle: "Select a date",
           list: rosterlist,
           date: req.body.date
         })
       }).lean()
-    }
-  }).lean()
 });
 
 router.get('/register', (req,res)=> {
@@ -231,9 +224,7 @@ router.post(
       }
       req.session.logged = true;
       res.render('rosterview/selectRoster',{
-        viewTitle: 'Select a date',
-        item: user.fname,
-        user_id: user.id
+        viewTitle: 'Select a date'
       })
       
     } catch (e) {
