@@ -15,6 +15,7 @@ exports.login = async(req, res, next) => {
       user_id: user.id
     });
   } else {
+    req.session.logged = false;
     res.render("rosterview/login", {
       viewTitle: "Login",
       errors: "Email & Password don't match!"
