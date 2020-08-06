@@ -4,7 +4,7 @@ User = require('../models/user')
 Roster = require('../models/roster')
 const { check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
-// const config = require('../config');
+const config = require('../config');
 
 const authController = require('../controllers/authController');
 
