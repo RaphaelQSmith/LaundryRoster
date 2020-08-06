@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set('trust proxy', 1)
 app.use(cookieSession({
     name: 'session',
-    keys: ['secret1', "secrete2"]
+    keys: [`${process.env.SECRET_1}`, `${process.env.SECRET_2}`]
 }))
 app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
@@ -25,4 +25,3 @@ const rosterRoute = require('./routes/routes');
 app.use('/', rosterRoute);
 
 app.listen(port, () => console.log(`Roster App listening on port ` + port));
-
