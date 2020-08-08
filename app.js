@@ -21,8 +21,7 @@ app.set('view engine', 'hbs');
 app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}))
 
 
-const rosterRoute = require('./routes/routes')
-app.use('/', rosterRoute)
+const rosterRoute = require('./routes/routes');
+app.use('/', rosterRoute);
 
-app.listen(port, () => console.log(`Roster App listening on port ` + port))
-
+app.listen(port, () => console.log(`Roster App listening on port ` + port));
