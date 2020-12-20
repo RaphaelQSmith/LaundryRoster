@@ -14,7 +14,7 @@ router.get('/home', (req, res) => {
   }
   if (req.session.logged == false) {
     res.render("rosterview/login", {
-      viewTitle: "Please login first!"
+      viewTitle: "Login"
     })
   } else {
     res.render("rosterview/selectRoster", {

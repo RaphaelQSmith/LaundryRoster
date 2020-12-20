@@ -1,11 +1,9 @@
 <h5 style="margin-top: 4%;" align='center'>{{viewTitle}}</h5>
 
-<div class="col s10"></div>
-<form enctype="application/json" action="/roster/" method="POST">
-    <input type="hidden" name="user_id" value="{{user_id}}">
-    <input type="text" name="date" class="datepicker col s3 offset-m6" placeholder="Select a date">
-    <button class="btn waves-effect waves-light col s3 offset-m6" type="submit">Search
-        <i class="material-icons right">Search</i>
-    </button>
-</form>
+<div class="col s10">
+    <form enctype="application/json" action="/roster/" method="POST">
+        <input type="hidden" name="user_id" value="{{user_id}}">
+        <input type="text" name="date" class="datepicker col s3 offset-m6" placeholder="Select a date">
+        <button class="btn waves-effect waves-light col s3 offset-m6" type="submit">Search</button>
+    </form>
 </div>

@@ -11,28 +11,33 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
-    <nav>
-        <div class="nav-wrapper teal" style="font-family: 'Quicksand' sans-serif;
- font-weight: 500;">
-            <a href="/" class="brand-logo" style="padding-left: 2%;">Roster System</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/home">Roster</a></li>
-                <li><a href="/newroster">Create</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
+<body style="display: flex;
+  min-height: 100vh;
+  flex-direction: column;">
+    <header>
+        <nav>
+            <div class="nav-wrapper teal" style="font-family: 'Quicksand' sans-serif; font-weight: 500;">
+                <a href="/" class="brand-logo" style="padding-left: 2%;">Roster System</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/home">Roster</a></li>
+                    <li><a href="/newroster">Create</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main style="flex: 1;">
+        {{!-- position where body will load --}}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {{{body}}}
+            </div>
         </div>
-    </nav>
-
-    {{!-- position where body will load --}}
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            {{{body}}}
-        </div>
-    </div>
-
-    <footer class="page-footer teal lighten-2 footer-fixed" style="margin-top: 15%;">
+    </main>
+    <footer class="page-footer teal lighten-2" style="display: flex;
+    min-height: 10vh;
+    flex-direction: column;">
 
         <div class="footer-copyright">
             <div class="container">
@@ -46,7 +51,7 @@
     <!-- Optional JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-         M.AutoInit();
+        M.AutoInit();
     </script>
 
 </body>
